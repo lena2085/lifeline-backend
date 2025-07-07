@@ -5,12 +5,17 @@ const triggerAlert = async (req, res) => {
     
     const { userId, alertType, location } = req.body;
     console.log("Incoming request:", req.body);
+    if (!userId || !alertType || !location) {
+  return res.status(400).json({ error: "Missing required fields" });
+}
+
     const alert = new Alert({
-      userId: req.body.userId,
-      alertType: req.body.alertType,
-      location: req.body.location,
-      triggeredAt: new Date(),
-    });
+  userId,
+  alertType,
+  location,
+  triggeredAt: new Date(),
+});
+
 
     await alert.save();
     res.status(201).json({ message: 'Alert triggered', alert });
