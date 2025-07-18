@@ -18,7 +18,8 @@ app.use(express.json());
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api', alertRoutes);
-app.use('/send-sms', smsRoute); // ✅ Mount SMS route
+app.use('/api', smsRoute); // ✅ All API routes under /api
+ // ✅ Mount SMS route
 
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URI)

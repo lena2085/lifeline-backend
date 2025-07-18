@@ -16,7 +16,7 @@ router.post('/send-sms', async (req, res) => {
 
   const data = {
     route: "q",
-    message: message,
+    message: message || "📢 Emergency Alert! Please respond immediately.",
     language: "english",
     numbers: number,
   };
