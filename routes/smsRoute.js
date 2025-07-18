@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const fetch = require('node-fetch');
+require("dotenv").config(); // Add this at top if not already
 
 // POST /send-sms
 router.post('/send-sms', async (req, res) => {
   const { number, message } = req.body;
-
-  const apiKey = process.env.eWYPytW1fBO4tmcMcWqoKA0SpUVlUZQ71CS5Dd4c8vmyOiQH9dFUFcI6A1hF;
+  
+  const apiKey = process.env.FAST2SMS_API_KEY;
   const url = "https://www.fast2sms.com/dev/bulkV2";
 
   const headers = {
