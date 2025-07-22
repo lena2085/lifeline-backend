@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const AlertSchema = new mongoose.Schema({
+const alertSchema = new mongoose.Schema({
   userId: { 
     type: mongoose.Schema.Types.ObjectId, 
     required: true,
@@ -20,4 +20,4 @@ const AlertSchema = new mongoose.Schema({
   isResolved: { type: Boolean, default: false }
 }, { timestamps: true });
 
-module.exports = mongoose.model('Alert', AlertSchema);
+module.exports = mongoose.model('Alert', alertSchema);

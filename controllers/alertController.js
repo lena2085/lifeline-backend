@@ -62,4 +62,3 @@ const getAlerts = async (req, res) => {
 };
 
 module.exports = { triggerAlert, getAlerts };
-

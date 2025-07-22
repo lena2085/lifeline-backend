@@ -4,9 +4,11 @@ const jwt = require('jsonwebtoken');
 
 // Register New User
 exports.register = async (req, res) => {
-  const { name, email, password } = req.body;
+  console.log("Registering new user:",req.body);
 
-  if (!name || !email || !password) {
+  const { name, email, phone, password } = req.body;
+
+  if (!name || !email || !phone || !password) {
     return res.status(400).json({ success: false, message: "All fields are required" });
   }
 
@@ -20,12 +22,19 @@ exports.register = async (req, res) => {
     const newUser = new User({
       name,
       email,
+      phone,
       password: hashedPassword
     });
 
     await newUser.save();
 
-    return res.status(201).json({ success: true, name: newUser.name });
+    return res.status(201).json({
+  success: true,
+  name: newUser.name,
+  email: newUser.email,
+  userId: newUser._id,
+});
+
   } catch (error) {
     console.error("Registration Error:", error);
     return res.status(500).json({ success: false, message: "Server error" });
@@ -50,7 +59,15 @@ exports.login = async (req, res) => {
     if (!isPasswordValid) {
       return res.status(401).json({ success: false, message: "Incorrect password" });
     }
-return res.status(200).json({ success: true, name: user.name });
+    console.log("✅ Login response userId:", user._id);
+
+ return res.status(200).json({
+  success: true,
+  name: user.name,
+  email: user.email,
+  userId: user._id, // 👈 required for backend alerts
+});
+
   } catch (error) {
     console.error("Login Error:", error);
     return res.status(500).json({ success: false, message: "Server error" });
